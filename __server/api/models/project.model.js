@@ -1,26 +1,22 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db/connect");
 
-const Users = sequelize.define('users', {
+const Users = sequelize.define('projects', {
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    username:{
+    p_name:{
         type: DataTypes.STRING,
         unique: true
     },
-    passw:{
-        type: DataTypes.STRING
+    p_description:{
+        type: DataTypes.TEXT
     },
-    user_class:{
-        type: DataTypes.STRING
-    },
-    email:{
-        type: DataTypes.STRING,
-        unique: true
-    }   
+    p_start:{
+        
+    }
 });
 
 Users.findOne({
