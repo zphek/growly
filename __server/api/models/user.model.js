@@ -20,17 +20,10 @@ const Users = sequelize.define('users', {
     email:{
         type: DataTypes.STRING,
         unique: true
-    }   
+    } ,
+    money:{
+       type: DataTypes.DOUBLE 
+    }  
 });
-
-Users.findOne({
-    where: {
-        username: 'edit2h',
-        passw: 'edi2th'
-    }
-})
-.then(data => console.log(data))
-.catch(err => console.log(err));
-//console.log(Users.findAll());
 
 module.exports = Users;

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db/connect");
 
-const Users = sequelize.define('projects', {
+const Projects = sequelize.define('projects', {
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -15,18 +15,21 @@ const Users = sequelize.define('projects', {
         type: DataTypes.TEXT
     },
     p_start:{
-        
+        type: DataTypes.DATE
+    },
+    p_end:{
+        type: DataTypes.DATE
+    },
+    goal:{
+        type: DataTypes.DOUBLE
+    },
+    p_state:{
+        type: DataTypes.BOOLEAN
+    },
+    user_id:{
+        type: DataTypes.INTEGER
     }
 });
 
-Users.findOne({
-    where: {
-        username: 'edit2h',
-        passw: 'edi2th'
-    }
-})
-.then(data => console.log(data))
-.catch(err => console.log(err));
-//console.log(Users.findAll());
 
-module.exports = Users;
+module.exports = Projects;

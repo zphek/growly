@@ -1,7 +1,7 @@
 const users = require("../models/user.model");
 
-class controllers {
-    async authUser(user, password) {
+class services {
+    async signIn(user, password) {
         try {
             const userInstance = await users.findOne({
                 where: {
@@ -10,7 +10,7 @@ class controllers {
                 }
             });
 
-            let data = {userExist: false, error: true};
+            let data = {userExist: false, error: false};
 
             if(userInstance){
                 data.userExist = true;
@@ -57,4 +57,4 @@ class controllers {
     }
 }
 
-module.exports = new controllers();
+module.exports = new services();
