@@ -40,6 +40,8 @@ class controllers{
                 httpOnly: true, 
                 secure: true
             })
+
+            data.token = token;
         }
 
         res.json(data);

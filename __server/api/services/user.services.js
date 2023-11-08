@@ -3,11 +3,18 @@ const users = require("../models/user.model");
 class services {
     async signIn(user, password) {
         try {
+            let where = {
+                passw: password
+            }
+
+            if(user.includes("@")){
+                where.email = user;
+            } else {
+                where.username = user;
+            }
+
             const userInstance = await users.findOne({
-                where: {
-                    username: user,
-                    passw: password
-                }
+                where
             });
 
             let data = {userExist: false, error: false};

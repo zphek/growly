@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Signup from './pages/SignUp.jsx';
 import GeneralContext, { GeneralProvider } from './contexts/GeneralProvider.jsx';
 import { useContext } from 'react';
 
@@ -16,8 +17,9 @@ function App() {
             <Routes>
               <Route path='/' Component={Home}/>
               <Route path="/login" Component={Login}/>
+              <Route path="/signup" Component={Signup}/>
             </Routes>
-          
+          <Footer/>
       </Router>
     </GeneralProvider>
   )
