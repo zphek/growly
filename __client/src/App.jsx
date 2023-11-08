@@ -8,7 +8,7 @@ import { useContext } from 'react';
 
 function App() {
 
-  const {state, dispatch} = useContext(GeneralContext);
+  //const {state, dispatch} = useContext(GeneralContext);
   return (
     <GeneralProvider>
       <Router>
@@ -17,7 +17,7 @@ function App() {
               <Route path='/' Component={Home}/>
               <Route path="/login" Component={Login}/>
             </Routes>
-          {state.show && (<Footer/>)}
+          
       </Router>
     </GeneralProvider>
   )
