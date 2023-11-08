@@ -1,0 +1,21 @@
+{
+  "name": "growly",
+  "version": "1.0.0",
+  "description": "...",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd __client && npm run dev",
+    "build": "cd __client && npm build",
+    "server": "cd __server && npx nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zphek/growly.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zphek/growly/issues"
+  },
+  "homepage": "https://github.com/zphek/growly#readme"
+}
