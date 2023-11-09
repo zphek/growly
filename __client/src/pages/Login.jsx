@@ -27,7 +27,7 @@ const handleSubmit = (e, user, password, setError, dispatch)=> {
 
         if(data.userExist){
             console.log(data)
-            document.cookie = `auth=${data.token}; expires=2h;`;
+            document.cookie = `token=${data.token}; expires=2h;`;
             dispatch({type:"sign_in", user: data.user});
         }
 
@@ -52,7 +52,7 @@ const Login = () => {
         dispatch({type: "toggle_nav_foot", show:false});
 
         console.log(state)
-        if(state.user != null){
+        if(state.user){
             navigate("/");
         }
 

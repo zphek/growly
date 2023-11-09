@@ -2,7 +2,9 @@ const Router = require("express").Router();
 const {auth, signIn, signOut, create, getUsers} = require("../controllers/user.controller");
 
 Router
-    .post("/auth", auth)
+    .post("/auth", (req, res)=>{
+        console.log(req.headers)
+    })
 
     .post("/signin", signIn)
 

@@ -9,12 +9,13 @@ import { useContext } from 'react';
 import Project from './pages/Project.jsx';
 import page404 from './pages/404.jsx';
 import Loader from './components/Loader.jsx';
+import Auth from './middleware/Auth.jsx';
 
 function App() {
-
   return (
     <GeneralProvider>
       <Router>
+          <Auth/>
           <Navbar/>
             <Routes>
               <Route path='/' Component={Home} loader={Loader}/>

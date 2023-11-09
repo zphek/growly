@@ -3,31 +3,36 @@ const jwt = require("jsonwebtoken");
 
 class controllers{
     async auth(req, res){
-        const {auth} = req.cookies;
+        
+        const token = req.headers;
 
-        let token = auth;
+        console.log(token)
 
-        console.log(req.cookies)
+        //console.log(token)
 
-        if(token){
-            jwt.verify(token, "DiePheeyiameimei8Yee", (err, {data: user})=>{
-                if(err){
-                    res.status(403).json({message: 'Authorization fail.', auth: false});
-                    return;
-                }
+        // if(token){
+        //     jwt.verify(token, "DiePheeyiameimei8Yee", (err, data)=>{
+        //         if(err){
+        //             console.log(err);
+        //             res.status(403).json({message: 'Authorization fail.', auth: false});
+        //             return;
+        //         }
+
+        //         res.json(data);
     
-                res.json({                    
-                    user,
-                    auth: true
-                });
+        //         // res.json({                    
+        //         //     user,
+        //         //     auth: true
+        //         // });
                 
-            });
+        //     });
 
-            return;
-        }
+        //     return;
+        // }
 
         res.json({
-            message: "You are not logged."
+            message: "You are not logged.",
+            auth: false
         });
     }
 
@@ -42,7 +47,8 @@ class controllers{
             
             res.cookie("token", token, {
                 httpOnly: true, 
-                secure: true
+                secure: true,
+                sameSite: 'none'
             })
 
             //console.log(token);

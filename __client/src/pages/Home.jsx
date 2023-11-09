@@ -38,7 +38,7 @@ const Home = () => {
         // Agrega más objetos según sea necesario
     ];
     
-    console.log(projects);
+    //console.log(projects);
     
 
     return (<div className="">

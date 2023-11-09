@@ -1,6 +1,6 @@
 import axios from "axios";
 
-async function sendReq(url, method = "get", data = null){
+async function sendReq(url, method = "get", data = null, headers = null){
     let conf = {
         method,
         url
@@ -11,7 +11,8 @@ async function sendReq(url, method = "get", data = null){
     }
 
     return await axios(conf, {
-        withCredentials: true
+        withCredentials: true,
+        headers
     });
 }
 

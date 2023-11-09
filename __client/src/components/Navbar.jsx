@@ -11,6 +11,8 @@ const Navbar = () => {
         console.log("cambio");
         console.log(state.show)
     }, [state.show])
+
+    console.log(state, "  ....")
     
   return (
     <header>
@@ -28,8 +30,18 @@ const Navbar = () => {
                     <li><Link href=""></Link></li>
                     <li><Link href=""></Link></li>
                     <li><Link href=""></Link></li>
-                    <li><Link to="/login" className='p-3 px-4'>Iniciar Sesión</Link></li>
-                    <li><Link to="/register" className='bg-blue-500 p-3 px-4 text-white rounded-lg'>Crear cuenta</Link></li>
+                    {!state.user ? (
+                        <>
+                            <li><Link to="/login" className='p-3 px-4'>Iniciar Sesión</Link></li>
+                            <li><Link to="/register" className='bg-blue-500 p-3 px-4 text-white rounded-lg'>Crear cuenta</Link></li>
+                        </>
+                    ) : (
+                        <>
+                            <h3>
+                                {state.user.username}
+                            </h3>
+                        </>
+                    )}
                 </ul>
             </div>
         </nav>}
