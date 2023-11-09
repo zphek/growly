@@ -4,8 +4,8 @@ const {create, getProject, getProjects} = require("../controllers/project.contro
 Router
     .post("/create", create)
     
-    .get("/project/:id", getProject)
+    .get("/:id", getProject)
     
-    .get("/projects", getProjects);
+    .get("/all", getProjects);
 
 module.exports = Router;

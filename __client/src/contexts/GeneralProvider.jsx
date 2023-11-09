@@ -7,7 +7,7 @@ function Reducer(state, action){
         case "toggle_nav_foot":
             return {
                 ...state,
-                show: state.show
+                show: action.show
             }
             
         case "sign_in":

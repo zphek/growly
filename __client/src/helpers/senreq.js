@@ -10,7 +10,9 @@ async function sendReq(url, method = "get", data = null){
         conf.data = data;
     }
 
-    return await axios(conf);
+    return await axios(conf, {
+        withCredentials: true
+    });
 }
 
 export default sendReq;

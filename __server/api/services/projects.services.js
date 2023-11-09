@@ -3,6 +3,9 @@ const projects = require("../models/project.model");
 class services {
     async create(project){
         try {
+            if(!project.image){
+                throw new Error('Falta la imagen.');
+            }
             let p = projects.create({
                 id: null,
                 p_name: project.name,
@@ -24,15 +27,15 @@ class services {
         }
     }
 
-    async getProject(id){
+    async getProject(name){
         try {
-            let projectInstance = projects.findOne({
-                id: id
+            let projectInstance = await projects.findOne({
+                p_name: name
             });
 
-            let data = {projectExist: false, exist: false, error: false};
+            let data = {projectExist: false, error: false};
 
-            if(project){
+            if(projectInstance){
                 data.projectExist = true;
                 data.error = false;
                 data.project = projectInstance;

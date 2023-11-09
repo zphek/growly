@@ -1,36 +1,40 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import growly from '../assets/growly.png';
+import { Link } from 'react-router-dom';
+import GeneralContext from '../contexts/GeneralProvider';
 
 const Navbar = () => {
-//   return (
-//     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-//       <div className="container-fluid d-flex align-items-center justify-content-center">
-//         <a className="navbar-brand" href="#">
-//           <img src={growly} alt="" width={100} />
-//         </a>
-//         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-//           <span className="navbar-toggler-icon"></span>
-//         </button>
-//         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-//           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-//             <li className="nav-item">
-//               <a className="nav-link active" aria-current="page" href="#">Home</a>
-//             </li>
-//             <li className="nav-item">
-//               <a className="nav-link" href="#">Link</a>
-//             </li>
-//             <li className="nav-item">
-//               <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
-//             </li>
-//           </ul>
-//           <form className="d-flex">
-//             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-//             <button className="btn btn-outline-success" type="submit">Search</button>
-//           </form>
-//         </div>
-//       </div>
-//     </nav>
-//   );
+    let {state, dispatch} = useContext(GeneralContext);
+
+    
+    useEffect(()=>{
+        console.log("cambio");
+        console.log(state.show)
+    }, [state.show])
+    
+  return (
+    <header>
+        {state.show && <nav className='flex flex-row p-4 items-center justify-between'>
+            <div className="brand">
+                <img src={growly} alt="" className='w-[7em]'/>
+            </div>
+
+            <div className='collapse' style={{display: 'none'}}>
+
+            </div>
+
+            <div>
+                <ul className='flex flex-row items-center'>
+                    <li><Link href=""></Link></li>
+                    <li><Link href=""></Link></li>
+                    <li><Link href=""></Link></li>
+                    <li><Link to="/login" className='p-3 px-4'>Iniciar Sesión</Link></li>
+                    <li><Link to="/register" className='bg-blue-500 p-3 px-4 text-white rounded-lg'>Crear cuenta</Link></li>
+                </ul>
+            </div>
+        </nav>}
+    </header>
+  );
 }
 
 export default Navbar;

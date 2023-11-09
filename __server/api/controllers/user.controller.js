@@ -3,7 +3,11 @@ const jwt = require("jsonwebtoken");
 
 class controllers{
     async auth(req, res){
-        const {token} = req.cookies;
+        const {auth} = req.cookies;
+
+        let token = auth;
+
+        console.log(req.cookies)
 
         if(token){
             jwt.verify(token, "DiePheeyiameimei8Yee", (err, {data: user})=>{
@@ -41,6 +45,7 @@ class controllers{
                 secure: true
             })
 
+            //console.log(token);
             data.token = token;
         }
 

@@ -8,7 +8,8 @@ const projects = require("./api/routes/projects.routes");
 const transactions = require("./api/routes/transaction.routes");
 
 app.use(cors({
-    origin: "*"
+    origin: "*",
+    credentials: true
 }));
 
 app.use(cookieParser());

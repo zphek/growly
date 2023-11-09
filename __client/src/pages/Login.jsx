@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import GeneralContext from "../contexts/GeneralProvider.jsx";
 import growly from '../assets/growly.png';
 import google from '../assets/google.png';
@@ -6,8 +6,10 @@ import facebook from '../assets/facebook.png';
 import email from '../assets/email.png';
 import bloquear from '../assets/bloquear.png';
 import sendReq from "../helpers/senreq.js";
-import { Link } from "react-router-dom";
+import back from '../assets/back.png';
+import { Link, useNavigate } from "react-router-dom";
 import ErrorAlert from "../components/ErrorAlert.jsx";
+import Auth from "../middleware/Auth.jsx";
 
 
 const handleSubmit = (e, user, password, setError, dispatch)=> {
@@ -26,7 +28,7 @@ const handleSubmit = (e, user, password, setError, dispatch)=> {
         if(data.userExist){
             console.log(data)
             document.cookie = `auth=${data.token}; expires=2h;`;
-            dispatch({type:"sign_in", user: document.user});
+            dispatch({type:"sign_in", user: data.user});
         }
 
         setError(!data.userExist);
@@ -42,7 +44,20 @@ const Login = () => {
     let [error, setError] = useState(false);
 
     const {state, dispatch} = useContext(GeneralContext);
-    // dispatch({type: "toggle_nav_foot", show: false});
+    const navigate = useNavigate();
+
+    Auth();
+    
+    useEffect(()=>{
+        dispatch({type: "toggle_nav_foot", show:false});
+
+        console.log(state)
+        if(state.user != null){
+            navigate("/");
+        }
+
+        console.log(document.cookie);
+    }, [state.user]);
 
     let user = useRef(), password = useRef();
 
@@ -50,6 +65,15 @@ const Login = () => {
     <>
     <div className="bg-slate-100 w-[100vw] h-[100vh] flex flex-row items-center">
         <div className="container lg:w-[30%] md:w-[60%] sm:w-[80%] p-5 rounded-md">
+                <div>
+                    <button className="bg-blue-600 p-3 mb-3 rounded-2xl text-white font-bold flex flex-row items-center justify-around back" onClick={e=>{navigate("/")}}>
+                        <img src={back} alt="" className="w-[25%]"/>
+                        <h3 className="text-lg">
+                            Atras
+                        </h3>
+                    </button>
+                </div>
+
             <form className="flex flex-col" onSubmit={e=> { handleSubmit(e, user, password, setError, dispatch) }}>                
                 <section>
                     <img src={growly} alt="" width={180}/>
@@ -57,7 +81,7 @@ const Login = () => {
                     <h3 className="mt-2 text-xl text-gray-600">¡Bienvenido devuelta! Selecciona un método de Inicio de Sesión.</h3>
                 </section>
             
-                <div className="flex flex-row flex-wrap justify-between w-100% gap-x-4 mt-4 mb-4">
+                <div className="flex flex-row flex-wrap justify-between w-100% gap-x-4 gap-y-3 mt-4 mb-4">
                     <button className="py-3 px-4 rounded-xl flex items-center justify-center gap-3 grow bg-[#28B446] shadow-lg shadow-[#28B446] text-white font-bold">
                         <img src={google} alt="" className="w-[30px] "/>Iniciar con Google</button>
                     
@@ -124,7 +148,7 @@ const Login = () => {
                     <div className="flex flex-row justify-center items-center mt-3 gap-x-5">
                         <h3>No tienes una cuenta?</h3>
                         <ul className="bg-blue-500 p-3 rounded-2xl flex flex-row items-center justify-center">
-                            <li className="text-white font-bold hover:shadow-blue-500"><Link to="/signup" className="transition-[900ms]">Crea una cuenta.</Link></li>
+                            <li className="text-white font-bold hover:shadow-blue-500"><Link to="/register" className="transition-[900ms]">Crea una cuenta.</Link></li>
                         </ul>
                     </div>
                 </section>
