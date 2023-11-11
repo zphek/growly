@@ -9,6 +9,7 @@ const Home = () => {
 
     useEffect(()=>{
         dispatch({type: "toggle_nav_foot", show:true});
+        dispatch({type: "set_title", title: "Proyectos"});
     }, []);
 
     let cant_projects = 69;
@@ -41,7 +42,7 @@ const Home = () => {
     //console.log(projects);
     
 
-    return (<div className="">
+    return (<div className="w-[100%] bg-slate-100 h-[100vh]">
 
         <div className="filter">
 

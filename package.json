@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/zphek/growly/issues"
   },
-  "homepage": "https://github.com/zphek/growly#readme"
+  "homepage": "https://github.com/zphek/growly#readme",
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.6"
+  }
 }

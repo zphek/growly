@@ -9,7 +9,7 @@ const transactions = require("./api/routes/transaction.routes");
 
 app.use(cors({
     origin: "*",
-    credentials: true,
+    credentials: true
 }));
 
 app.use((req, res, next) => {

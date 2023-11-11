@@ -1,6 +1,7 @@
 import axios from "axios";
 
-async function sendReq(url, method = "get", data = null, headers = null){
+async function sendReq(url, method = "get", data = null){
+
     let conf = {
         method,
         url
@@ -12,7 +13,9 @@ async function sendReq(url, method = "get", data = null, headers = null){
 
     return await axios(conf, {
         withCredentials: true,
-        headers
+        headers: {
+            Authorization: "Bearer 1234"
+        }
     });
 }
 

@@ -24,13 +24,19 @@ function Reducer(state, action){
                 user: null
             }
 
+        case "set_title":
+            return{
+                ...state,
+                title: action.title
+            }
+
         default:
             return state;
     }
 }
 
 function GeneralProvider({children}){
-    let [state, dispatch] = useReducer(Reducer, {show: true, auth: false, user: null});
+    let [state, dispatch] = useReducer(Reducer, {show: true, auth: false, user: null, title: ""});
 
     let data = {state, dispatch};
 

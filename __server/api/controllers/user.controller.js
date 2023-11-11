@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 class controllers{
     async auth(req, res){
         
-        const token = req.headers;
+        const token = req.cookies;
 
-        console.log(token)
+        console.dir(req.headers.authorization)
 
         //console.log(token)
 
@@ -46,7 +46,6 @@ class controllers{
             const token = jwt.sign({data: data.user}, "DiePheeyiameimei8Yee", {expiresIn: '2h'});
             
             res.cookie("token", token, {
-                httpOnly: true, 
                 secure: true,
                 sameSite: 'none'
             })
