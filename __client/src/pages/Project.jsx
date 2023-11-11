@@ -1,16 +1,34 @@
 import { useParams } from "react-router-dom";
 import sendReq from "../helpers/senreq";
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
+import { useEffect, useState } from "react";
+import Data from "../components/Data";
+import axios from "axios";
 
 
 const Project = () => {
     let {name} = useParams();
+    let [data, setData] = useState({});
+    let [imag, setImg] = useState("");
     console.log(name)
     
-    sendReq("http://localhost:3000/project/"+name)
-    .then(data=>{
-        console.log(data);
-    });
+    useEffect(()=>{
+      sendReq("http://localhost:3000/project/"+name)
+      .then(({data})=>{
+        console.log(data.project);
+        setData(data.project);
+      });
+
+      axios("https://random.imagecdn.app/500/150",
+      {
+        responseType: "arraybuffer"
+      })
+      .then(({data})=>{
+        const encoder = new TextEncoder();
+        const buffer = encoder.encode(data);
+        console.log(buffer.toString("base64"));
+      });
+    }, []);
 
     return (
         <div className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -45,7 +63,7 @@ const Project = () => {
               <div className="lg:pr-4">
                 <div className="lg:max-w-lg">
                   <p className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</p>
-                  <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A better workflow</h1>
+                  <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{data.p_name}</h1>
                   <p className="mt-6 text-xl leading-8 text-gray-700">
                     Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam
                     eget aliquam. Quisque id at vitae feugiat egestas.
@@ -56,7 +74,7 @@ const Project = () => {
             <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
               <img
                 className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
-                src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+                src={imag}
                 alt=""
               />
             </div>
@@ -64,10 +82,7 @@ const Project = () => {
               <div className="lg:pr-4">
                 <div className="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
                   <p>
-                    Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet
-                    vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque
-                    erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris
-                    semper sed amet vitae sed turpis id.
+                    {data.p_description}
                   </p>
                   <ul role="list" className="mt-8 space-y-8 text-gray-600">
                     <li className="flex gap-x-3">
@@ -109,6 +124,8 @@ const Project = () => {
               </div>
             </div>
           </div>
+
+          <Data/>
         </div>
       );
 }

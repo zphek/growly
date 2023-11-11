@@ -69,7 +69,109 @@ const Signup = () => {
 
     return (
     <>
-    <div className="bg-slate-100 w-[100vw] h-[100vh] flex flex-row items-center">
+    <>
+    <div className="bg-slate-100 h-[100vh] flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            className="w-2/5 mb-1 mx-auto"
+            src={growly}
+            alt="Your Company"
+          />
+        
+          <h1 className="mt-3 text-start text-xl font-bold leading-9 tracking-tight text-[#0D378C]">Crea una nueva cuenta</h1>
+          <h3 className="mt-1 text-[1.1em] text-start text-2xl leading-9 tracking-tight text-gray-600">¡Bienvenido! Por favor, ingresa tus datos para crear una cuenta.</h3>
+        </div>
+
+        <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" onSubmit={e=>{}}>
+            
+            <div className="flex flex-col gap-y-2">
+              <button
+                type="submit"
+                className="flex w-full justify-center items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold leading-6 text-white bg-[#28B446] shadow-lg shadow-[#28B446] hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                <img src={google} alt="" className="w-[1.5em] h-[1.5em]" />Registrarse con Google
+              </button>
+
+              <button
+                type="submit"
+                className="flex w-full justify-center items-center gap-2 rounded-md bg-[#1976D2] px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                <img src={facebook} alt="" className="w-[1.5em] h-[1.5em]" />
+                Registrarse con Facebook
+              </button>
+            </div>
+
+            <h3 className="text-center flex flex-row items-center text-sm text-gray-500 justify-center">
+                <hr className="w-1/4 border-t-2 border-gray-300 my-0 mr-4" />O continúa con email<hr className="w-1/4 border-t-2 border-gray-300 my-0 ml-4" />
+            </h3>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                Correo o usuario
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  ref={user} style={{ background: (error.error ? "#ffa6ac": "")}}/>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                  Contraseña
+                </label>
+                <div className="text-sm">
+                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                    Forgot password?
+                  </a>
+                </div>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  ref={password} style={{ background: (error.error ? "#ffa6ac": "")}}/>
+              </div>
+            </div>
+            
+            {error.error && (
+                            <h3 className="text-red-600 mb-3 text-sm md:text-base">
+                                El usuario o contraseña son incorrectos.
+                            </h3>
+            )}
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-blue-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Iniciar Sesión
+              </button>
+            </div>
+          </form>
+
+          <p className="mt-10 text-center text-sm text-gray-500">
+            No estas registrado?{' '}
+            <Link to="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Crear cuenta
+            </Link>
+          </p>
+        </div>
+        </div>
+        </>
+
+    {/* <div className="bg-slate-100 w-[100vw] h-[100vh] flex flex-row items-center">
         <div className="container lg:w-[30%] md:w-[600%] sm:w-[100%] p-5 rounded-md">
                 <div>
                     <button className="bg-blue-600 p-3 mb-3 rounded-2xl text-white font-bold flex flex-row items-center justify-around back" onClick={e=>{ navigate("/"); }}>
@@ -186,7 +288,7 @@ const Signup = () => {
                 </section>
             </form>
         </div>
-    </div>
+    </div> */}
     </>);
 }
  

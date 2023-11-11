@@ -16,7 +16,7 @@ class controllers{
     getProjects(req, res){
         getProjects()
         .then(data=>{
-            res.json(data);
+            res.json({...data});
         });
     }
 }
