@@ -22,12 +22,17 @@ const RegisterCompany = () => {
             <form action="">
                 <div className="w-[100%] flex flex-col mb-3">
                     <h2 className="text-base font-bold mb-1 rounded-md outline-none">NOMBRE DEL PROYECTO: </h2>
-                    <input type="text" className="block border-b-5 border-gray-200 focus:ring-2 transition-[300ms]" name="" id="" />
+                    <input type="text" className="block border-b-5 border-gray-200 focus:ring-2 transition-[300ms]" name="" id="" required/>
                 </div>
 
                 <div className="w-[100%] flex flex-col mb-3">
                     <h2 className="text-base font-bold mb-1 rounded-md">DESCRIPCION DEL PROYECTO: </h2>
-                    <textarea name="" className="border-b-5 border-gray-200 resize-none transition-[300ms]" id="" cols="30" rows="10"></textarea>
+                    <textarea name="" className="border-b-5 border-gray-200 resize-none transition-[300ms] h-[180px]" id="" cols="30" rows="10" required></textarea>
+                </div>
+
+                <div className="w-[100%] flex flex-col mb-3">
+                        <h3 className="text-base font-bold">Meta</h3>
+                        <input type="number" placeholder="$RD" className="border-b-5 border-gray-200 focus:ring-2 transition-[300ms]" id="" min={0} required/>
                 </div>
 
                 <div className="border-dashed border-2 border-gray-300 w-[100%] h-[200px] flex flex-row items-center justify-center mt-2 bg-slate-50 relative transition-[300ms]" onMouseOver={e=>{handleOver(e, setOver, true)}} onMouseOut={e=>{handleOver(e, setOver, false)}}>
@@ -46,7 +51,7 @@ const RegisterCompany = () => {
                     </div>)}
                 </div>
 
-                <button className="bg-blue-600 px-3 py-1 text-sm font-bold text-white block w-[100%] rounded-sm mt-4">
+                <button className="bg-blue-600 px-3 py-1 text-sm font-bold text-white block w-[100%] rounded-sm mt-4" type="submit">
                     SUBIR PROYECTO
                 </button>
             </form>

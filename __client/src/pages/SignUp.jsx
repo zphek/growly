@@ -32,6 +32,9 @@ const Signup = () => {
     document.title = "Growly | Crear cuenta";
     let [error, setError] = useState({message: "", error: false});
     let [rpassword, setRpassword] = useState(false);
+    let [show, setShow] = useState(true);
+    let selectedOption = useRef();
+
     const navigate = useNavigate();
     const {state, dispatch} = useContext(GeneralContext);
     const [formData, setFormData] = useState({
@@ -83,7 +86,23 @@ const Signup = () => {
         </div>
 
         <div className="mt-3 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={e=>{}}>
+          {show ?
+          (
+            <>
+                <div className="flex flex-col justify-items">
+                    <h3 className="text-base font-bold">Deseo ser:</h3>
+                    <select name="" id="" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <option value="">Invertidor</option>
+                        <option value="">Emprendedor</option>
+                    </select>
+
+                    <button className="px-4 py-2 bg-blue-800 text-white rounded-lg mt-4 text-base font-bold" onClick={e=>{ setShow(false) }}>
+                        SIGUIENTE
+                    </button>
+                </div>
+            </>
+          ) 
+          :<form className="space-y-6" onSubmit={e=>{}}>
             
             <div className="flex flex-col gap-y-2">
               <button
@@ -159,12 +178,12 @@ const Signup = () => {
                 Iniciar Sesión
               </button>
             </div>
-          </form>
+          </form>}
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            No estas registrado?{' '}
-            <Link to="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Crear cuenta
+            Ya estas registrado?{' '}
+            <Link to="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              Iniciar Sesión
             </Link>
           </p>
         </div>
