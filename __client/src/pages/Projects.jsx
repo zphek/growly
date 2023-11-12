@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import ProjectCard from "../components/projectCard";
 import GeneralContext from "../contexts/GeneralProvider";
 import sendReq from "../helpers/senreq";
+import data from "../utils/musk";
 
 const Projects = () => {
     document.title = "Growly | Inicio";
@@ -13,17 +14,7 @@ const Projects = () => {
         dispatch({ type: "toggle_nav_foot", show: true });
         dispatch({ type: "set_title", title: "Proyectos" });
 
-        sendReq("http://localhost:3000/project/all")
-            .then(({data}) => {
-                console.log(data);
-                if (data.projectExist) {
-                    setProjects(prev => [...prev, {...data.project}]); // Assuming the API response contains a property named 'projects'
-                    return;
-                }
-                //setProjects([]);
-            });
-
-            console.log(projects);
+        setProjects(data());
     }, []);
 
     let cant_projects = projects.length;

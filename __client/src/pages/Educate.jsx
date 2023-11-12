@@ -1,7 +1,30 @@
-import cover from '../assets/cover.jpeg';
+import p1 from '../assets/educate/p1.jpeg';
+import p2 from '../assets/educate/p2.jpeg';
+import p3 from '../assets/educate/p3.jpeg';
+
+
 import CourseCard from '../components/CourseCard';
 
 const Educate = () => {
+
+    let cursos = [
+        {
+            title: "Curso de emprendimiento",
+            description: "Este curso ofrece el desarrollo de ideas de negocio, marketing y ventas, liderazgo y gestion.",
+            image: p1
+        },
+        {
+            title: "Curso de Gestión financiera",
+            description: "Este curso busca cubrir temas como el analisis financiero, planeacion financiera, presupuestos, inversiones y riesgos.",
+            image: p2
+        },
+        {
+            title: "Curso de Marketing Digital",
+            description: "Este curso busca sentarte las bases con respecto a temas como los fundamentos del marketing digital y el analisis de audiencia.",
+            image: p3
+        }
+    ]
+
     return (<div className="h-full w-full bg-slate-200">
         <div className="flex flex-col justify-center items-center h-auto relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-500">
             <div className="font-base font-bold text-3xl xs:text-lg lg:text-[4em] py-24 xs:py-2 text-white flex flex-col w-auto ">
@@ -16,10 +39,10 @@ const Educate = () => {
         </div>
 
         <div className="courses mt-4 flex gap-3 container flex-wrap justify-center mb-4">
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
-            <CourseCard/>
+            {cursos.map((el, index)=>{
+                //console.log(el);
+                return <CourseCard key={index} data={el}/>
+            })}
         </div>
     </div>);
 }

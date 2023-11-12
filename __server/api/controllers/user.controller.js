@@ -45,10 +45,13 @@ class controllers{
             console.log("inicio sesion");
             const token = jwt.sign({data: data.user}, "DiePheeyiameimei8Yee", {expiresIn: '2h'});
             
-            res.cookie("token", data.user, {
+            res.cookie("token", token, {
                 secure: true,
                 sameSite: 'none'
             })
+
+            //console.log(token);
+            data.token = token;
         }
 
         res.json(data);

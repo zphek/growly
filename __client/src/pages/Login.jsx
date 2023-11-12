@@ -61,7 +61,7 @@ const Login = () => {
 
     return (
         <>
-    <div className="bg-slate-100 h-[100vh] flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    <div className="bg-slate-100 flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
         <button className="flex flex-row gap-x-2 items-center justify-center bg-blue-800 px-3 py-2 rounded-lg text-white hover:bg-blue-500 transition-[300ms]" onClick={e=> {navigate("/")}}>
