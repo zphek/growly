@@ -6,23 +6,29 @@ const handleOver = (e, setOver, val)=>{
     setOver(val)
 }
 
-const RegisterCompany = () => {
+const RegisterCompany = ({data}) => {
     let {state, dispatch} = useContext(GeneralContext);
     let [over, setOver] = useState(false);
+
+    let {username} = data;
 
     useEffect(()=>{
         dispatch({type: "toggle_nav_foot", show: false});
     }, []);
     
     return (<div className="bg-slate-100 h-[100vh] flex justify-center items-center min-h-full">
-        <div className="lg:w-1/2 sm:w-[100%] xs:w-[100%] p-3">
+        <div className="lg:w-1/2 sm:w-[100%] xs:w-[100%] p-3 rounded-lg">
 
-            <h1 className="text-base text-[30px] font-bold mb-3 leading-2">CREAR CUENTA - EMPRESARIAL</h1>
+            <h1 className="text-base text-xl font-bold mb-3 leading-2">CREAR CUENTA - EMPRENDEDOR</h1>
             <hr className="mb-3"/>
             <form action="">
                 <div className="w-[100%] flex flex-col mb-3">
                     <h2 className="text-base font-bold mb-1 rounded-md outline-none">NOMBRE DEL PROYECTO: </h2>
-                    <input type="text" className="block border-b-5 border-gray-200 focus:ring-2 transition-[300ms]" name="" id="" required/>
+                    <div className="block border-b-5 border-gray-200 focus:ring-2 transition-[300ms] hover:bg-gray-100">
+                        <h3 className="text-[2.1em] text-slate-500">
+                            {username}
+                        </h3>
+                    </div>
                 </div>
 
                 <div className="w-[100%] flex flex-col mb-3">
@@ -31,10 +37,11 @@ const RegisterCompany = () => {
                 </div>
 
                 <div className="w-[100%] flex flex-col mb-3">
-                        <h3 className="text-base font-bold">Meta</h3>
+                        <h3 className="text-base font-bold">META:</h3>
                         <input type="number" placeholder="$RD" className="border-b-5 border-gray-200 focus:ring-2 transition-[300ms]" id="" min={0} required/>
                 </div>
 
+                <h3 className="font-bold">AÑADIR IMAGENES:</h3>
                 <div className="border-dashed border-2 border-gray-300 w-[100%] h-[200px] flex flex-row items-center justify-center mt-2 bg-slate-50 relative transition-[300ms]" onMouseOver={e=>{handleOver(e, setOver, true)}} onMouseOut={e=>{handleOver(e, setOver, false)}}>
                     {!over ? (<button className="bg-blue-600 px-5 py-2 rounded-lg text-white text-base transition-[300ms] flex flex-row gap-1 items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

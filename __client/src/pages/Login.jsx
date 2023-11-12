@@ -51,7 +51,7 @@ const Login = () => {
         dispatch({ type: "toggle_nav_foot", show: false });
 
         if (state.user) {
-            navigate("/");
+            navigate("/projects");
         }
 
         console.log(document.cookie);
@@ -63,6 +63,17 @@ const Login = () => {
         <>
     <div className="bg-slate-100 h-[100vh] flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+
+        <button className="flex flex-row gap-x-2 items-center justify-center bg-blue-800 px-3 py-2 rounded-lg text-white hover:bg-blue-500 transition-[300ms]" onClick={e=> {navigate("/")}}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+          </svg>
+          
+          <h3>
+            Atrás
+          </h3>
+        </button>
+        
           <img
             className="w-2/5 mb-1 mx-auto"
             src={growly}

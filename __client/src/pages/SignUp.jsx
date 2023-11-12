@@ -4,12 +4,11 @@ import growly from '../assets/growly.png';
 import google from '../assets/google.png';
 import outlook from '../assets/outlook.png';
 import sendReq from "../helpers/senreq.js";
+import RegisterCompany from '../components/RegisterCompany.jsx'
 import { Link, useNavigate } from "react-router-dom";
 
-const handleSubmit = (e, formData, dispatch, setError)=> {
+const handleSubmit = (e, formData, dispatch, setError, setEntrepeneur, setFormData, navigate)=> {
     e.preventDefault();
-
-    let {} = formData;
 
     console.log({...formData})
 
@@ -23,6 +22,14 @@ const handleSubmit = (e, formData, dispatch, setError)=> {
             setError({message: data.message, error: data.error})
         }else {
             setError({message: "", error: false});
+            
+            if(formData.userclass == "emprendedor"){
+                setEntrepeneur(true);
+                setFormData(data.user);
+                return;
+            }
+
+            navigate("/login");
         }
     });
 }
@@ -32,8 +39,8 @@ const Signup = () => {
     let [error, setError] = useState({message: "", error: false});
     let [rpassword, setRpassword] = useState(false);
     let [show, setShow] = useState(true);
-    let selectedOption = useRef();
-
+    let [entrepeneur, setEntrepeneur] = useState(false);
+  
     const navigate = useNavigate();
     const {state, dispatch} = useContext(GeneralContext);
     const [formData, setFormData] = useState({
@@ -41,7 +48,6 @@ const Signup = () => {
         username: "",
         password: "",
         confirmPassword: "",
-        gender: "",
         userclass: ""
     });
     
@@ -54,6 +60,7 @@ const Signup = () => {
     }, []);
 
     const handleChange = (e) => {
+        console.log(e.target.value);
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -71,9 +78,18 @@ const Signup = () => {
 
     return (
     <>
-    <>
-    <div className="bg-slate-100 h-[100vh] flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+    {!entrepeneur ?
+        (<div className="bg-slate-100 h-[100vh] flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <button className="flex flex-row gap-x-2 items-center justify-center bg-blue-800 px-3 py-2 rounded-lg text-white hover:bg-blue-500 transition-[300ms]" onClick={e=> {navigate("/")}}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+          </svg>
+          
+          <h3>
+            Atrás
+          </h3>
+        </button>
           <img
             className="w-2/5 mb-1 mx-auto"
             src={growly}
@@ -92,8 +108,9 @@ const Signup = () => {
                     <h3 className="text-base font-bold">Deseo ser:</h3>
                     <select name="userclass" id="" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     onChange={handleChange}>
-                        <option value="">Inversor</option>
-                        <option value="">Emprendedor</option>
+                        <option value="">---------------</option>
+                        <option value="inversor">Inversor</option>
+                        <option value="emprendedor">Emprendedor</option>
                     </select>
 
                     <button className="px-4 py-2 bg-blue-800 text-white rounded-lg mt-4 text-base font-bold" onClick={e=>{ setShow(false) }}>
@@ -102,7 +119,7 @@ const Signup = () => {
                 </div>
             </>
           ) 
-          :<form className="space-y-4" onSubmit={e=>{}}>
+          :<form className="space-y-4" onSubmit={e=>{handleSubmit(e, formData, dispatch, setError, setEntrepeneur, setFormData, navigate)}}>
             
             <div className="flex flex-col gap-y-2">
               <button
@@ -133,13 +150,13 @@ const Signup = () => {
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
-                  name="password"
-                  type="password"
+                  id="username"
+                  name="username"
+                  type="text"
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  ref={user} style={{ background: (error.error ? "#ffa6ac": "")}}/>
+                  ref={user} style={{ background: (error.error ? "#ffa6ac": "")}} onChange={handleChange}/>
               </div>
             </div>
 
@@ -155,7 +172,7 @@ const Signup = () => {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  ref={user} style={{ background: (error.error ? "#ffa6ac": "")}}/>
+                  ref={user} style={{ background: (error.error ? "#ffa6ac": "")}} onChange={handleChange}/>
               </div>
             </div>
 
@@ -201,11 +218,17 @@ const Signup = () => {
                     </h3>
             )}
 
+            {error.error && (
+                    <h3 className="text-red-500">
+                        {error.message}
+                    </h3>
+            )}
+
             <div>
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-blue-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+                >
                 Crear cuenta
               </button>
             </div>
@@ -218,128 +241,10 @@ const Signup = () => {
             </Link>
           </p>
         </div>
-        </div>
-        </>
-
-    {/* <div className="bg-slate-100 w-[100vw] h-[100vh] flex flex-row items-center">
-        <div className="container lg:w-[30%] md:w-[600%] sm:w-[100%] p-5 rounded-md">
-                <div>
-                    <button className="bg-blue-600 p-3 mb-3 rounded-2xl text-white font-bold flex flex-row items-center justify-around back" onClick={e=>{ navigate("/"); }}>
-                        <img src={back} alt="" className="w-[15%]"/>
-                        <h3 className="text-lg">
-                            Atras
-                        </h3>
-                    </button>
-                </div>
-            <form className="flex flex-col" onSubmit={e=> { handleSubmit(e, formData, dispatch, setError) }}>                
-                <section>
-                    <img src={growly} alt="" width={180}/>
-                    <h1 className="text-[2.5em] font-bold mt-4 text-[#0D378C]">Crear una cuenta</h1>
-                    <h3 className="mt-2 text-xl text-gray-600">¡Bienvenido! Por favor, ingresa tus datos para crear una cuenta.</h3>
-                </section>    
-
-                <div className="flex flex-row flex-wrap justify-between w-100% gap-x-4 gap-y-3 mt-4 mb-4">
-                    <button className="py-3 px-4 rounded-xl flex items-center justify-center gap-3 grow bg-[#28B446] shadow-lg shadow-[#28B446] text-white font-bold">
-                        <img src={google} alt="" className="w-[20px] "/>Registrarse con Google</button>
-                    
-                    <button className="py-3 px-4 rounded-xl flex items-center justify-center gap-3 grow bg-[#1976D2] shadow-lg shadow-[#1976D2] text-white font-bold">
-                        <img src={facebook} alt="" className="w-[20px]" />Registrarse con Facebook</button>
-                </div>
-
-                <h3 className="text-center flex flex-row items-center justify-center">
-                    <hr className="w-1/4 border-t-2 border-gray-300 my-0 mr-4" />O registrate con email<hr className="w-1/4 border-t-2 border-gray-300 my-0 ml-4" /> 
-                </h3>
-                
-                <section className="data mt-4">
-                    <section className="flex flex-row flex-wrap justify-between flex-grow gap-x-2 gap-y-3">
-                        <div className="flex flex-col grow">
-                            <h2 className="text-lg font-sans">
-                                Email
-                            </h2>
-
-                            <input type="email" name="email" id="" required onChange={handleChange}/>
-                        </div>
-
-                        <div className="flex flex-col grow">
-                        <h2 className="text-lg font-sans">
-                            Nombre de usuario
-                        </h2>
-
-                        <input type="text" name="username" id="" required onChange={handleChange}/>
-                    </div>
-                    </section>
-
-                    <section className="flex flex-col gap-y-3 mt-4">
-                        <div className="flex flex-col">
-                            <h2 className="text-lg font-sans">
-                                Inserta la contraseña
-                            </h2>
-
-                            <input type="password" name="password" id="" required ref={password} onChange={handleChange}/>
-                        </div>
-
-                        <div className="flex flex-col">
-                            <h2 className="text-lg font-sans">
-                                Repite la contraseña
-                            </h2>
-
-                            <input type="password" name="confirmPassword" id="" required onChange={handleChange}/>
-
-                            {rpassword && (
-                                <h3 className="text-red-500">
-                                    Las contraseñas no coinciden.
-                                </h3>
-                            )}
-                        </div>
-
-                        <div className="flex flex-row flex-grow gap-2">
-                            <div className="grow flex flex-col">
-                                <h3 className="text-lg font-sans mb-2">
-                                    Sexo
-                                </h3>
-                                <select name="gender" id="" className="px-4 py-2 bg-blue-600 text-white" required onChange={handleChange}>
-                                    <option value="">-----------</option>
-                                    <option value="masculino">Masculino</option>
-                                    <option value="femenino">Femenino</option>
-                                </select>
-                            </div>
-
-                            <div className="grow flex flex-col">
-                                <h3 className="text-lg font-sans mb-2">
-                                    Tipo de cuenta
-                                </h3>
-                                <select name="userclass" id="" className="px-4 py-2 bg-blue-600 text-white" required onChange={handleChange}>
-                                    <option value="">-----------</option>
-                                    <option value="inversionista">Inversionista</option>
-                                    <option value="empresa">Empresa</option>
-                                </select>
-                            </div>
-                        </div>
-                    </section>
-                </section>
-                
-                {error.error &&(
-                    <h3 className="text-red-500">
-                        {error.message}
-                    </h3>
-                )}
-
-                <section className="flex flex-col">
-                    <button className="block bg-blue-800 py-3 text-white rounded-lg text-xl mt-4" type="submit">
-                        Crear cuenta
-                    </button>
-
-                    <div className="flex flex-row justify-center items-center mt-3 gap-x-5">
-                        <h3>Ya creaste una cuenta?</h3>
-                        <ul className="bg-blue-500 p-3 rounded-2xl flex flex-row items-center justify-center">
-                            <li className="text-white font-bold hover:shadow-blue-500"><Link to="/login" className="transition-[900ms]">Iniciar sesión.</Link></li>
-                        </ul>
-                    </div>
-                </section>
-            </form>
-        </div>
-    </div> */}
-    </>);
+        </div>)
+        : (<RegisterCompany data={formData}/>)
+        }
+        </>);
 }
  
 export default Signup;

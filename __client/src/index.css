@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
+
 @layer components{
     .data input{
         padding: 0.5em;

@@ -31,13 +31,13 @@ class services {
         }
     }
 
-    async createUser(usern, email, password) {
+    async createUser(usern, email, password, userclass) {
     try {
         const user = await users.create({
             id: null,
             username: usern,
             passw: password,
-            user_class: 'USER',
+            user_class: userclass,
             email: email
         });
 
@@ -48,7 +48,7 @@ class services {
     } catch (err) {
         console.log(err);
         return {
-            message: "Choose other username or email.",
+            message: "Choose other name or email.",
             error: true
         };
     }

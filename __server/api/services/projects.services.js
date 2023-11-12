@@ -13,7 +13,7 @@ class services {
                 p_start: project.start,
                 p_end: project.end,
                 goal: project.goal,
-                p_state: project.state,
+                p_state: false,
                 user_id: project.user_Id
             });
 

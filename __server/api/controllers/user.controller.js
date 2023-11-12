@@ -45,13 +45,10 @@ class controllers{
             console.log("inicio sesion");
             const token = jwt.sign({data: data.user}, "DiePheeyiameimei8Yee", {expiresIn: '2h'});
             
-            res.cookie("token", token, {
+            res.cookie("token", data.user, {
                 secure: true,
                 sameSite: 'none'
             })
-
-            //console.log(token);
-            data.token = token;
         }
 
         res.json(data);
@@ -65,14 +62,14 @@ class controllers{
     }
 
     create(req, res){
-        let {username, email, password} = req.body;
+        let {username, email, password, userclass} = req.body;
 
-        if(!(username && email && password)){
+        if(!(username && email && password && userclass)){
             res.json({message: "Error, missing to fill in a field.", error: true});
             return;
         }
 
-        createUser(username, email, password)
+        createUser(username, email, password, userclass)
         .then(data=>{
             res.json(data);
         })
