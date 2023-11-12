@@ -2,6 +2,8 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import GeneralContext from '../contexts/GeneralProvider'
 import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import EntrepeneurSettings from './entrepeneur/EntrepeneurSettings';
+import InvestorsSettings from './investors/InvestorsSettings';
 
 export default function Settings() {
 

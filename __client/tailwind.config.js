@@ -13,7 +13,8 @@ export default {
       xl: '1280px'
     },
     fontFamily:{
-      abgalumo: ['Abgalumo']
+      abgalumo: ['Abgalumo'],
+      sans: ['ui-sans-serif', 'system-ui']
     }
   },
   plugins: [require('@tailwindcss/forms')],

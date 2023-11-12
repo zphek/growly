@@ -35,11 +35,4 @@
     .back:hover{
         @apply shadow-xl;
     }
-
-    .cover{
-        background-image: url("./assets/home.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-    }
 }

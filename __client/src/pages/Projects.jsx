@@ -22,8 +22,12 @@ const Projects = () => {
     return (
         <div className="w-[100%] bg-slate-100 h-[100vh]">
             <div className="filter"></div>
-            <div className="container">
-                <h2 className="text-2xl font-bold">{cant_projects} Proyectos apasionantes para invertir</h2>
+            <h2 className="text-lg lg:text-2xl font-bold bg-blue-500 mb-3">
+                <div className="container py-3 font-bold text-white">
+                    <h2>Descubre emocionantes proyectos esperando tu inversión</h2>
+                </div>
+            </h2>
+            <div className="container py-5">
                 <div className="projects flex flex-row flex-wrap gap-[5em]">
                     {projects.map((pro, index) => <ProjectCard key={index} data={pro} />)}
                 </div>
