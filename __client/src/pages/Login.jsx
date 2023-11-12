@@ -6,6 +6,7 @@ import facebook from '../assets/facebook.png';
 import email from '../assets/email.png';
 import bloquear from '../assets/bloquear.png';
 import sendReq from "../helpers/senreq.js";
+import outlook from "../assets/outlook.png";
 import back from '../assets/back.png';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -87,8 +88,8 @@ const Login = () => {
                 type="submit"
                 className="flex w-full justify-center items-center gap-2 rounded-md bg-[#1976D2] px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                <img src={facebook} alt="" className="w-[1.5em] h-[1.5em]" />
-                Iniciar con Facebook
+                <img src={outlook} alt="" className="w-[1.5em] h-[1.5em]" />
+                Iniciar con Outlook
               </button>
             </div>
 
@@ -98,7 +99,7 @@ const Login = () => {
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Correo o usuario
+                Correo electrónico
               </label>
               <div className="mt-2">
                 <input

@@ -124,8 +124,9 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Company', href: '#' },
+    { name: 'Invierte', href: '#' },
     { name: 'Stores', href: '#' },
+    { name: 'Edúcate', href: '#'}
   ],
 }
 

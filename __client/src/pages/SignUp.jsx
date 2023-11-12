@@ -2,8 +2,7 @@ import { useContext, useRef, useState, useEffect } from "react";
 import GeneralContext from "../contexts/GeneralProvider.jsx";
 import growly from '../assets/growly.png';
 import google from '../assets/google.png';
-import facebook from '../assets/facebook.png';
-import back from '../assets/back.png'
+import outlook from '../assets/outlook.png';
 import sendReq from "../helpers/senreq.js";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -91,18 +90,19 @@ const Signup = () => {
             <>
                 <div className="flex flex-col justify-items">
                     <h3 className="text-base font-bold">Deseo ser:</h3>
-                    <select name="" id="" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <option value="">Invertidor</option>
+                    <select name="userclass" id="" className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={handleChange}>
+                        <option value="">Inversor</option>
                         <option value="">Emprendedor</option>
                     </select>
 
                     <button className="px-4 py-2 bg-blue-800 text-white rounded-lg mt-4 text-base font-bold" onClick={e=>{ setShow(false) }}>
-                        SIGUIENTE
+                        Siguiente
                     </button>
                 </div>
             </>
           ) 
-          :<form className="space-y-6" onSubmit={e=>{}}>
+          :<form className="space-y-4" onSubmit={e=>{}}>
             
             <div className="flex flex-col gap-y-2">
               <button
@@ -116,8 +116,8 @@ const Signup = () => {
                 type="submit"
                 className="flex w-full justify-center items-center gap-2 rounded-md bg-[#1976D2] px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                <img src={facebook} alt="" className="w-[1.5em] h-[1.5em]" />
-                Registrarse con Facebook
+                <img src={outlook} alt="" className="w-[1.5em] h-[1.5em]" />
+                Registrarse con Outlook
               </button>
             </div>
 
@@ -126,8 +126,26 @@ const Signup = () => {
             </h3>
 
             <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                  Nombre de la empresa
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  ref={user} style={{ background: (error.error ? "#ffa6ac": "")}}/>
+              </div>
+            </div>
+
+            <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Correo o usuario
+                Correo electrónico
               </label>
               <div className="mt-2">
                 <input
@@ -136,7 +154,7 @@ const Signup = () => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   ref={user} style={{ background: (error.error ? "#ffa6ac": "")}}/>
               </div>
             </div>
@@ -146,11 +164,6 @@ const Signup = () => {
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                   Contraseña
                 </label>
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -159,15 +172,33 @@ const Signup = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  ref={password} style={{ background: (error.error ? "#ffa6ac": "")}}/>
+                  className="block w-full rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  ref={password} onChange={handleChange}/>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                  Repetir contraseña
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="block w-full rounded-md border-0 py-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}/>
               </div>
             </div>
             
-            {error.error && (
-                            <h3 className="text-red-600 mb-3 text-sm md:text-base">
-                                El usuario o contraseña son incorrectos.
-                            </h3>
+            {rpassword && (
+                    <h3 className="text-red-500">
+                        Las contraseñas no coinciden.
+                    </h3>
             )}
 
             <div>
@@ -175,12 +206,12 @@ const Signup = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-blue-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-700 transition-[600ms] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Iniciar Sesión
+                Crear cuenta
               </button>
             </div>
           </form>}
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-2 text-center text-sm text-gray-500">
             Ya estas registrado?{' '}
             <Link to="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Iniciar Sesión
