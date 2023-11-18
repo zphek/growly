@@ -3,16 +3,19 @@ import benjamin from '../assets/nosotros/benjamin.jpeg';
 import bernardo from '../assets/nosotros/bernardo.jpeg';
 import gabriela from '../assets/nosotros/gabriela.jpeg';
 import somos from '../assets/somos.jpg';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
+    let navigate = useNavigate();
+
     return (<div className="h-full w-ful">
         <div className="h-[90vh] overflow-hidden flex flex-col xs:flex-col items-center justify-center space-x-7 cover relative bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-sky-400 to-indigo-900">
             <div className='h-[90vh] overflow-hidden flex flex-col xs:flex-col items-center justify-center space-x-7 z-20'>
                 <h2 className="font-sans text-4xl lg:text-6xl font-bold mb-2 text-slate-200">Growly</h2>
                 <h3 className="text-white text-2xl lg:text-4xl font-bold text-center">Impulsamos a emprendedores al conectarlos con inversionistas dispuestos a financiar proyectos.</h3>
                 <h2 className="text'white text-xl text-center lg:text-3xl text-white mt-3">¡Únete a la acción y forma parte de nuestra plataforma que conecta emprendedores con inversionistas!</h2>
-                <h2 className="mt-5 text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 px-6 py-3 rounded-md font-bold">Registrarme en Growly</h2>    
+                <button className="mt-5 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-pink-500 hover:to-yellow-500 hover:transition-[900ms] px-6 py-3 rounded-md font-bold" onClick={e=>{ navigate("/register") }}>Registrarme en Growly</button>    
             </div>
         </div>
 

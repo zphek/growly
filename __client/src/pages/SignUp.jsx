@@ -10,13 +10,13 @@ import { Link, useNavigate } from "react-router-dom";
 const handleSubmit = (e, formData, dispatch, setError, setEntrepeneur, setFormData, navigate)=> {
     e.preventDefault();
 
-    console.log({...formData})
+    //console.log({...formData})
 
     sendReq("http://localhost:3000/user/create", "post", {
         ...formData
     })
     .then(({data}) =>{
-        console.log(data);
+        //console.log(data);
 
         if(data.error){
             setError({message: data.message, error: data.error})
@@ -60,7 +60,7 @@ const Signup = () => {
     }, []);
 
     const handleChange = (e) => {
-        console.log(e.target.value);
+        //console.log(e.target.value);
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
